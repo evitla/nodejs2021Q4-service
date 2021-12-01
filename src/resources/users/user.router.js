@@ -1,11 +1,13 @@
-const router = require('express').Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
+const userController = require('./user.controller');
 
-router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  // map user fields to exclude secret fields like "password"
-  res.json(users.map(User.toResponse));
-});
+function router(fastify, options, done) {
+  fastify.get('/users', userController.getAll);
+  fastify.get('/users/:id', userController.getById);
+  fastify.post('/users', userController.create);
+  fastify.delete('/users/:id', userController.remove);
+  fastify.put('/users/:id', userController.update);
+
+  done();
+}
 
 module.exports = router;
