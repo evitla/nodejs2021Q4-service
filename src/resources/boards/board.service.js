@@ -1,4 +1,5 @@
 const boardsRepo = require('./board.memory.repository');
+const { removeAllByBoardId } = require('../tasks/task.memory.repository');
 
 const getAll = async () => {
   const boards = await boardsRepo.getAll();
@@ -17,6 +18,7 @@ const create = async (boardData) => {
 
 const remove = async (id) => {
   const message = await boardsRepo.remove(id);
+  await removeAllByBoardId(id);
   return message;
 };
 
