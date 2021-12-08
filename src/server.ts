@@ -3,7 +3,7 @@ const app = require('./app');
 
 const start = async () => {
   try {
-    await app.listen(PORT, (err, address) => {
+    await app.listen(PORT, (err: any, address: any) => {
       if (err) throw err;
       console.log(`Server is now listening on ${address}`);
     });

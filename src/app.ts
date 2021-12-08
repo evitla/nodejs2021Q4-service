@@ -18,6 +18,4 @@ fastify.register(userRouter);
 fastify.register(boardRouter);
 fastify.register(taskRouter);
 
-const app = fastify;
-
-module.exports = app;
+module.exports = fastify;
