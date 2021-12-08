@@ -1,20 +1,22 @@
+export {};
+
 const User = require('./user.model');
 
-let users = [];
+let users: User[] = [];
 
-const getAll = async () =>
+const getAllUsers = async () =>
   new Promise((resolve) => {
     resolve(users.map(User.toResponse));
   });
 
-const getById = async (id) =>
+const getUserById = async (id: any) =>
   new Promise((resolve) => {
-    const user = users.map(User.toResponse).find((u) => u.id === id);
+    const user = users.map(User.toResponse).find((u: any) => u.id === id);
 
-    resolve(User.toResponse(user));
+    resolve(User.toResponse(user as any));
   });
 
-const create = async (userData) =>
+const createUser = async (userData: any) =>
   new Promise((resolve) => {
     const user = new User({ ...userData });
 
@@ -23,14 +25,14 @@ const create = async (userData) =>
     resolve(User.toResponse(user));
   });
 
-const remove = async (id) =>
+const removeUser = async (id: any) =>
   new Promise((resolve) => {
     users = users.filter((u) => u.id !== id);
 
     resolve(`User deleted successfully`);
   });
 
-const update = async (id, updatedUserData) =>
+const updateUser = async (id: any, updatedUserData: any) =>
   new Promise((resolve) => {
     const user = users.find((u) => u.id === id);
 
@@ -42,9 +44,9 @@ const update = async (id, updatedUserData) =>
   });
 
 module.exports = {
-  getAll,
-  getById,
-  create,
-  remove,
-  update,
+  getAllUsers,
+  getUserById,
+  createUser,
+  removeUser,
+  updateUser,
 };
