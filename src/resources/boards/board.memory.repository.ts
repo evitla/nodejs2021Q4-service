@@ -1,14 +1,16 @@
+export {};
+
 const Board = require('./board.model');
 const Column = require('./column.model');
 
-let boards = [];
+let boards: Board[] = [];
 
-const getAll = async () =>
+const getAllBoards = async () =>
   new Promise((resolve) => {
     resolve(boards);
   });
 
-const getById = async (id) =>
+const getBoardById = async (id: any) =>
   new Promise((resolve, reject) => {
     const board = boards.find((b) => b.id === id);
 
@@ -19,13 +21,13 @@ const getById = async (id) =>
     }
   });
 
-const create = async (boardData) =>
+const createBoard = async (boardData: any) =>
   new Promise((resolve) => {
     const { columns } = boardData;
 
     const data = {
       ...boardData,
-      columns: columns.map((col) => new Column({ ...col })),
+      columns: columns.map((col: any) => new Column({ ...col })),
     };
 
     const board = new Board({ ...data });
@@ -35,14 +37,14 @@ const create = async (boardData) =>
     resolve(board);
   });
 
-const remove = async (id) =>
+const removeBoard = async (id: any) =>
   new Promise((resolve) => {
     boards = boards.filter((b) => b.id !== id);
 
     resolve(`Board deleted successfully`);
   });
 
-const update = async (id, updatedBoardData) =>
+const updateBoard = async (id: any, updatedBoardData: any) =>
   new Promise((resolve) => {
     const board = boards.find((b) => b.id === id);
 
@@ -54,9 +56,9 @@ const update = async (id, updatedBoardData) =>
   });
 
 module.exports = {
-  getAll,
-  getById,
-  create,
-  remove,
-  update,
+  getAllBoards,
+  getBoardById,
+  createBoard,
+  removeBoard,
+  updateBoard,
 };
