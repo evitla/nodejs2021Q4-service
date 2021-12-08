@@ -1,8 +1,22 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4Task } = require('uuid');
 
 class Task {
+  readonly id: string;
+
+  title: string;
+
+  order: number;
+
+  description: string;
+
+  userId: string | null;
+
+  boardId: string | null;
+
+  columnId: string | null;
+
   constructor({
-    id = uuidv4(),
+    id = uuidv4Task(),
     title = 'task title',
     order = 0,
     description = 'task description',

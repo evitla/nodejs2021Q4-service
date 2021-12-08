@@ -1,13 +1,15 @@
+export {};
+
 const Task = require('./task.model');
 
-let tasks = [];
+let tasks: Task[] = [];
 
-const getAll = async () =>
+const getAllTasks = async () =>
   new Promise((resolve) => {
     resolve(tasks);
   });
 
-const getById = async (boardId, id) =>
+const getTaskById = async (boardId: any, id: any) =>
   new Promise((resolve, reject) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 
@@ -18,7 +20,7 @@ const getById = async (boardId, id) =>
     }
   });
 
-const create = async (boardId, taskData) =>
+const createTask = async (boardId: any, taskData: any) =>
   new Promise((resolve) => {
     const task = new Task({ ...taskData, boardId });
 
@@ -27,9 +29,8 @@ const create = async (boardId, taskData) =>
     resolve(task);
   });
 
-const remove = async (boardId, id) =>
+const removeTask = async (boardId: any, id: any) =>
   new Promise((resolve) => {
-    // tasks = tasks.filter((t) => t.boardId !== boardId && t.id !== id);
     let boardTasks = tasks.filter((t) => t.boardId === boardId);
     const restTasks = tasks.filter((t) => t.boardId !== boardId);
 
@@ -40,14 +41,14 @@ const remove = async (boardId, id) =>
     resolve(`Task deleted successfully`);
   });
 
-const removeAllByBoardId = async (boardId) =>
+const removeAllTasksByBoardId = async (boardId: any) =>
   new Promise((resolve) => {
     tasks = tasks.filter((t) => t.boardId !== boardId);
 
     resolve(`All board's tasks deleted`);
   });
 
-const update = async (boardId, id, updatedTaskData) =>
+const updateTask = async (boardId: any, id: any, updatedTaskData: any) =>
   new Promise((resolve) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 
@@ -61,10 +62,10 @@ const update = async (boardId, id, updatedTaskData) =>
   });
 
 module.exports = {
-  getAll,
-  getById,
-  create,
-  remove,
-  removeAllByBoardId,
-  update,
+  getAllTasks,
+  getTaskById,
+  createTask,
+  removeTask,
+  removeAllTasksByBoardId,
+  updateTask,
 };
