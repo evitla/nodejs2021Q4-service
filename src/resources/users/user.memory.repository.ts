@@ -2,11 +2,20 @@ import User, { IUser, IUserToResponse } from './user.model';
 
 let users: User[] = [];
 
+/**
+ * Asynchronously returns all users
+ */
 export const getAllUsers = async (): Promise<IUserToResponse[]> =>
   new Promise((resolve) => {
     resolve(users.map(User.toResponse));
   });
 
+/**
+ * Asynchronously returns user by id.
+ * Returns error if user not found for a given id
+ * 
+ * @param id - string in uuidv4 format
+ */
 export const getUserById = async (id: string): Promise<IUserToResponse> =>
   new Promise((resolve, reject) => {
     const user = users.find((u) => u.id === id);
@@ -18,6 +27,11 @@ export const getUserById = async (id: string): Promise<IUserToResponse> =>
     }
   });
 
+/**
+ * Asynchronously returns created user
+ * 
+ * @param userData - user data with `id`, `name`, `login` and `password` fields
+ */
 export const createUser = async (userData: IUser): Promise<IUserToResponse> =>
   new Promise((resolve) => {
     const user = new User(userData);
@@ -27,6 +41,11 @@ export const createUser = async (userData: IUser): Promise<IUserToResponse> =>
     resolve(User.toResponse(user));
   });
 
+/**
+ * Asynchronously returns message `User deleted successfully`
+ * 
+ * @param id - string in uuidv4 format
+ */
 export const removeUser = async (id: string): Promise<string> =>
   new Promise((resolve) => {
     users = users.filter((u) => u.id !== id);
@@ -34,6 +53,12 @@ export const removeUser = async (id: string): Promise<string> =>
     resolve(`User deleted successfully`);
   });
 
+/**
+ * Asynchronously returns updated user 
+ * 
+ * @param id - string in uuidv4 format
+ * @param updatedUserData - user data with `id`, `name`, `login` and `password` fields
+ */
 export const updateUser = async (id: string, updatedUserData: IUser): Promise<IUserToResponse> =>
   new Promise((resolve) => {
     const user = users.find((u) => u.id === id);

@@ -31,6 +31,11 @@ class User implements IUser {
     this.password = password;
   }
 
+  /**
+   * Returns user's all fields except password
+   * 
+   * @param user - instance of User class
+   */
   static toResponse(user: User): IUserToResponse {
     const { id, name, login } = user;
     return { id, name, login };
