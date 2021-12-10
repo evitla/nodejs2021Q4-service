@@ -1,5 +1,3 @@
-// const { v4: uuidv4User } = require('uuid');
-
 import { v4 as uuidv4 } from 'uuid';
 
 class User {
@@ -30,4 +28,3 @@ class User {
 }
 
 export default User;
-// module.exports = User;
