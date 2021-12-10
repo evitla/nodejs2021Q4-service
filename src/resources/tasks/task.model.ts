@@ -1,4 +1,4 @@
-const { v4: uuidv4Task } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
 class Task {
   readonly id: string;
@@ -16,7 +16,7 @@ class Task {
   columnId: string | null;
 
   constructor({
-    id = uuidv4Task(),
+    id = uuidv4(),
     title = 'task title',
     order = 0,
     description = 'task description',
@@ -33,4 +33,4 @@ class Task {
   }
 }
 
-module.exports = Task;
+export default Task;

@@ -1,15 +1,13 @@
-export {};
-
-const Task = require('./task.model');
+import Task from './task.model';
 
 let tasks: Task[] = [];
 
-const getAllTasks = async () =>
+export const getAllTasks = async () =>
   new Promise((resolve) => {
     resolve(tasks);
   });
 
-const getTaskById = async (boardId: any, id: any) =>
+export const getTaskById = async (boardId: any, id: any) =>
   new Promise((resolve, reject) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 
@@ -20,7 +18,7 @@ const getTaskById = async (boardId: any, id: any) =>
     }
   });
 
-const createTask = async (boardId: any, taskData: any) =>
+export const createTask = async (boardId: any, taskData: any) =>
   new Promise((resolve) => {
     const task = new Task({ ...taskData, boardId });
 
@@ -29,7 +27,7 @@ const createTask = async (boardId: any, taskData: any) =>
     resolve(task);
   });
 
-const removeTask = async (boardId: any, id: any) =>
+export const removeTask = async (boardId: any, id: any) =>
   new Promise((resolve) => {
     let boardTasks = tasks.filter((t) => t.boardId === boardId);
     const restTasks = tasks.filter((t) => t.boardId !== boardId);
@@ -41,14 +39,14 @@ const removeTask = async (boardId: any, id: any) =>
     resolve(`Task deleted successfully`);
   });
 
-const removeAllTasksByBoardId = async (boardId: any) =>
+export const removeAllTasksByBoardId = async (boardId: any) =>
   new Promise((resolve) => {
     tasks = tasks.filter((t) => t.boardId !== boardId);
 
     resolve(`All board's tasks deleted`);
   });
 
-const updateTask = async (boardId: any, id: any, updatedTaskData: any) =>
+export const updateTask = async (boardId: any, id: any, updatedTaskData: any) =>
   new Promise((resolve) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 
@@ -60,12 +58,3 @@ const updateTask = async (boardId: any, id: any, updatedTaskData: any) =>
 
     resolve(updatedTask);
   });
-
-module.exports = {
-  getAllTasks,
-  getTaskById,
-  createTask,
-  removeTask,
-  removeAllTasksByBoardId,
-  updateTask,
-};

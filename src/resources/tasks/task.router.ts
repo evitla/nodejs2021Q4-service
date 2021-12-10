@@ -1,6 +1,6 @@
-const taskService = require('./task.service');
+import * as taskService from './task.service';
 
-module.exports = (fastify: any, options: any, done: any) => {
+const router = (fastify: any, options: any, done: any) => {
   fastify.get('/boards/:boardId/tasks', taskService.getAll);
   fastify.get('/boards/:boardId/tasks/:id', taskService.getById);
   fastify.post('/boards/:boardId/tasks', taskService.create);
@@ -9,3 +9,5 @@ module.exports = (fastify: any, options: any, done: any) => {
 
   done();
 };
+
+export default router;

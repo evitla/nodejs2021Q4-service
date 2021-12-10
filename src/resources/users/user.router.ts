@@ -1,6 +1,6 @@
-const userService = require('./user.service');
+import * as userService from './user.service';
 
-module.exports = (fastify: any, options: any, done: any) => {
+const router = (fastify: any, options: any, done: any) => {
   fastify.get('/users', userService.getAll);
   fastify.get('/users/:id', userService.getById);
   fastify.post('/users', userService.create);
@@ -9,3 +9,5 @@ module.exports = (fastify: any, options: any, done: any) => {
 
   done();
 };
+
+export default router;

@@ -1,22 +1,23 @@
-export {};
-
-const User = require('./user.model');
+import User from './user.model';
 
 let users: User[] = [];
 
-const getAllUsers = async () =>
+export const getAllUsers = async () =>
   new Promise((resolve) => {
     resolve(users.map(User.toResponse));
   });
 
-const getUserById = async (id: any) =>
+export const getUserById = async (id: string) =>
   new Promise((resolve) => {
-    const user = users.map(User.toResponse).find((u: any) => u.id === id);
+    const user = users.find((u) => u.id === id);
 
-    resolve(User.toResponse(user as any));
+    if (user !== undefined) {
+      resolve(User.toResponse(user));
+    }
+
   });
 
-const createUser = async (userData: any) =>
+export const createUser = async (userData: any) =>
   new Promise((resolve) => {
     const user = new User({ ...userData });
 
@@ -25,14 +26,14 @@ const createUser = async (userData: any) =>
     resolve(User.toResponse(user));
   });
 
-const removeUser = async (id: any) =>
+export const removeUser = async (id: string) =>
   new Promise((resolve) => {
     users = users.filter((u) => u.id !== id);
 
     resolve(`User deleted successfully`);
   });
 
-const updateUser = async (id: any, updatedUserData: any) =>
+export const updateUser = async (id: string, updatedUserData: any) =>
   new Promise((resolve) => {
     const user = users.find((u) => u.id === id);
 
@@ -42,11 +43,3 @@ const updateUser = async (id: any, updatedUserData: any) =>
 
     resolve(User.toResponse(updatedUser));
   });
-
-module.exports = {
-  getAllUsers,
-  getUserById,
-  createUser,
-  removeUser,
-  updateUser,
-};
