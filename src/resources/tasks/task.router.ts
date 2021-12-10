@@ -1,6 +1,6 @@
 import * as taskService from './task.service';
 
-const router = (fastify: any, options: any, done: any) => {
+const taskRouter = (fastify: any, options: any, done: any) => {
   fastify.get('/boards/:boardId/tasks', taskService.getAll);
   fastify.get('/boards/:boardId/tasks/:id', taskService.getById);
   fastify.post('/boards/:boardId/tasks', taskService.create);
@@ -10,4 +10,4 @@ const router = (fastify: any, options: any, done: any) => {
   done();
 };
 
-export default router;
+export default taskRouter;

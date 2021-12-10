@@ -9,7 +9,7 @@ import * as userService from './user.service';
  * @param options - options for fastify server instance
  * @param done - callback function to continue with fastify lifecycle
  */
-const router = (fastify: FastifyInstance, options: FastifyServerOptions, done: () => void): void => {
+const userRouter = (fastify: FastifyInstance, options: FastifyServerOptions, done: () => void): void => {
   fastify.get('/users', userService.getAll);
   fastify.get('/users/:id', userService.getById);
   fastify.post('/users', userService.create);
@@ -19,4 +19,4 @@ const router = (fastify: FastifyInstance, options: FastifyServerOptions, done: (
   done();
 };
 
-export default router;
+export default userRouter;
