@@ -1,6 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class User {
+export interface IUserToResponse {
+  id: string;
+  name: string;
+  login: string;
+}
+
+export interface IUser extends IUserToResponse {
+  password: string;
+}
+
+class User implements IUser {
   readonly id: string;
 
   name: string;
@@ -21,7 +31,7 @@ class User {
     this.password = password;
   }
 
-  static toResponse(user: User) {
+  static toResponse(user: User): IUserToResponse {
     const { id, name, login } = user;
     return { id, name, login };
   }
