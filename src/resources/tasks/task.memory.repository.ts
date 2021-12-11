@@ -1,13 +1,13 @@
-import Task from './task.model';
+import Task, { ITask } from './task.model';
 
 let tasks: Task[] = [];
 
-export const getAllTasks = async () =>
+export const getAllTasks = async (): Promise<Task[]> =>
   new Promise((resolve) => {
     resolve(tasks);
   });
 
-export const getTaskById = async (boardId: any, id: any) =>
+export const getTaskById = async (boardId: string, id: string): Promise<Task> =>
   new Promise((resolve, reject) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 
@@ -18,7 +18,10 @@ export const getTaskById = async (boardId: any, id: any) =>
     }
   });
 
-export const createTask = async (boardId: any, taskData: any) =>
+export const createTask = async (
+  boardId: string,
+  taskData: ITask
+): Promise<Task> =>
   new Promise((resolve) => {
     const task = new Task({ ...taskData, boardId });
 
@@ -27,7 +30,10 @@ export const createTask = async (boardId: any, taskData: any) =>
     resolve(task);
   });
 
-export const removeTask = async (boardId: any, id: any) =>
+export const removeTask = async (
+  boardId: string,
+  id: string
+): Promise<string> =>
   new Promise((resolve) => {
     let boardTasks = tasks.filter((t) => t.boardId === boardId);
     const restTasks = tasks.filter((t) => t.boardId !== boardId);
@@ -39,14 +45,20 @@ export const removeTask = async (boardId: any, id: any) =>
     resolve(`Task deleted successfully`);
   });
 
-export const removeAllTasksByBoardId = async (boardId: any) =>
+export const removeAllTasksByBoardId = async (
+  boardId: string
+): Promise<string> =>
   new Promise((resolve) => {
     tasks = tasks.filter((t) => t.boardId !== boardId);
 
     resolve(`All board's tasks deleted`);
   });
 
-export const updateTask = async (boardId: any, id: any, updatedTaskData: any) =>
+export const updateTask = async (
+  boardId: string,
+  id: string,
+  updatedTaskData: ITask
+): Promise<Task> =>
   new Promise((resolve) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
 

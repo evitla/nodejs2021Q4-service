@@ -1,6 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Task {
+export interface ITask {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string | null;
+  boardId: string | null;
+  columnId: string | null;
+}
+
+class Task implements ITask {
   readonly id: string;
 
   title: string;
@@ -22,7 +32,7 @@ class Task {
     description = 'task description',
     boardId = null,
     columnId = null,
-  } = {}) {
+  }: ITask) {
     this.id = id;
     this.title = title;
     this.order = order;
