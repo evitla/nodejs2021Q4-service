@@ -1,6 +1,11 @@
+import { FastifyInstance, FastifyServerOptions } from 'fastify';
 import * as boardService from './board.service';
 
-const boardRouter = (fastify: any, options: any, done: any) => {
+const boardRouter = (
+  fastify: FastifyInstance,
+  options: FastifyServerOptions,
+  done: () => void
+) => {
   fastify.get('/boards', boardService.getAll);
   fastify.get('/boards/:id', boardService.getById);
   fastify.post('/boards', boardService.create);

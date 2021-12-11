@@ -1,6 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Column {
+export interface IColumn {
+  id: string;
+  title: string;
+  order: number;
+}
+
+class Column implements IColumn {
   readonly id: string;
 
   title: string;

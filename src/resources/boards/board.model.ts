@@ -1,18 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
-import Column from './column.model';
+import { IColumn } from './column.model';
 
-class Board {
+export interface IBoard {
+  id: string;
+  title: string;
+  columns: IColumn[];
+}
+
+class Board implements IBoard {
   readonly id: string;
 
   title: string;
 
-  columns: Column[];
+  columns: IColumn[];
 
-  constructor({
-    id = uuidv4(),
-    title = 'board title',
-    columns = [],
-  } = {}) {
+  constructor({ id = uuidv4(), title = 'board title', columns = [] }: IBoard) {
     this.id = id;
     this.title = title;
     this.columns = columns;

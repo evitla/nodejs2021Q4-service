@@ -1,14 +1,14 @@
-import Board from './board.model';
+import Board, { IBoard } from './board.model';
 import Column from './column.model';
 
 let boards: Board[] = [];
 
-export const getAllBoards = async () =>
+export const getAllBoards = async (): Promise<Board[]> =>
   new Promise((resolve) => {
     resolve(boards);
   });
 
-export const getBoardById = async (id: any) =>
+export const getBoardById = async (id: string): Promise<Board> =>
   new Promise((resolve, reject) => {
     const board = boards.find((b) => b.id === id);
 
@@ -19,30 +19,33 @@ export const getBoardById = async (id: any) =>
     }
   });
 
-export const createBoard = async (boardData: any) =>
+export const createBoard = async (boardData: IBoard): Promise<Board> =>
   new Promise((resolve) => {
     const { columns } = boardData;
 
     const data = {
       ...boardData,
-      columns: columns.map((col: any) => new Column({ ...col })),
+      columns: columns.map((col) => new Column(col)),
     };
 
-    const board = new Board({ ...data });
+    const board = new Board(data);
 
     boards = [...boards, board];
 
     resolve(board);
   });
 
-export const removeBoard = async (id: any) =>
+export const removeBoard = async (id: string): Promise<string> =>
   new Promise((resolve) => {
     boards = boards.filter((b) => b.id !== id);
 
     resolve(`Board deleted successfully`);
   });
 
-export const updateBoard = async (id: any, updatedBoardData: any) =>
+export const updateBoard = async (
+  id: string,
+  updatedBoardData: IBoard
+): Promise<Board> =>
   new Promise((resolve) => {
     const board = boards.find((b) => b.id === id);
 
