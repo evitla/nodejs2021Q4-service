@@ -3,7 +3,7 @@ import app from './app';
 
 const start = async () => {
   try {
-    await app.listen(config.PORT, (err: any, address: any) => {
+    await app.listen(config.PORT, (err: Error | null, address: string) => {
       if (err) throw err;
       console.log(`Server is now listening on ${address}`);
     });
