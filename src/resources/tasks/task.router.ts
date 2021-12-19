@@ -1,6 +1,13 @@
 import { FastifyInstance, FastifyServerOptions } from 'fastify';
 import * as taskService from './task.service';
 
+/**
+ * Routes for task rest endpoints
+ * 
+ * @param fastify - fastify server instance
+ * @param options - options for fastify server instance
+ * @param done - callback function to continue with fastify lifecycle
+ */
 const taskRouter = (
   fastify: FastifyInstance,
   options: FastifyServerOptions,

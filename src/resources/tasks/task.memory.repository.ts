@@ -2,11 +2,21 @@ import Task, { ITask } from './task.model';
 
 let tasks: Task[] = [];
 
+/**
+ * Asynchronously returns all tasks
+ */
 export const getAllTasks = async (): Promise<Task[]> =>
   new Promise((resolve) => {
     resolve(tasks);
   });
 
+/**
+ * Asynchronously returns task by id.
+ * Returns error if user not found for a given id
+ * 
+ * @param boardId - string in uuidv4 format
+ * @param id - string in uuidv4 format
+ */
 export const getTaskById = async (boardId: string, id: string): Promise<Task> =>
   new Promise((resolve, reject) => {
     const task = tasks.find((t) => t.boardId === boardId && t.id === id);
@@ -18,6 +28,12 @@ export const getTaskById = async (boardId: string, id: string): Promise<Task> =>
     }
   });
 
+/**
+ * Asynchronously returns created task
+ * 
+ * @param boardId - string in uuidv4 format
+ * @param taskData - user data with `id`, `title`, `order`, `description`, `userId`, `boardId` and `columnId` fields
+ */
 export const createTask = async (
   boardId: string,
   taskData: ITask
@@ -30,6 +46,12 @@ export const createTask = async (
     resolve(task);
   });
 
+/**
+ * Asynchronously returns message `Task deleted successfully`
+ * 
+ * @param boardId - string in uuidv4 format
+ * @param id - string in uuidv4 format
+ */
 export const removeTask = async (
   boardId: string,
   id: string
@@ -45,6 +67,11 @@ export const removeTask = async (
     resolve(`Task deleted successfully`);
   });
 
+/**
+ * Asynchronously returns message `All board's tasks deleted`
+ * 
+ * @param id - string in uuidv4 format
+ */
 export const removeAllTasksByBoardId = async (
   boardId: string
 ): Promise<string> =>
@@ -54,6 +81,12 @@ export const removeAllTasksByBoardId = async (
     resolve(`All board's tasks deleted`);
   });
 
+/**
+ * Asynchronously returns updated task 
+ * 
+ * @param id - string in uuidv4 format
+ * @param taskData - user data with `id`, `title`, `order`, `description`, `userId`, `boardId` and `columnId` fields
+ */
 export const updateTask = async (
   boardId: string,
   id: string,
