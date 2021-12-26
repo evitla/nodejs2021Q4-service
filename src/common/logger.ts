@@ -1,9 +1,10 @@
 import pino from 'pino';
+import { LOG_LEVELS } from './config';
 
 const transport = pino.transport({
   targets: [
     {
-      level: 'error',
+      level: LOG_LEVELS[0] as pino.LevelWithSilent,
       target: 'pino-pretty',
       options: {
         destination: './logs/error.log',
@@ -13,7 +14,7 @@ const transport = pino.transport({
       },
     },
     {
-      level: 'trace',
+      level: LOG_LEVELS[4] as pino.LevelWithSilent,
       target: 'pino-pretty',
       options: {
         destination: './logs/all.log',

@@ -12,3 +12,11 @@ export default {
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
   AUTH_MODE: process.env.AUTH_MODE === 'true',
 };
+
+export const LOG_LEVELS = {
+  0: 'error',
+  1: 'warn',
+  2: 'info',
+  3: 'debug',
+  4: 'all',
+};
