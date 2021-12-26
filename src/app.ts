@@ -26,6 +26,17 @@ app.register(userRouter);
 app.register(boardRouter);
 app.register(taskRouter);
 
+app.setErrorHandler((err, req, reply) => {
+  logger.error(err);
+
+  if (reply.statusCode >= 400 && reply.statusCode < 500) {
+    app.log.info({ name: err.name, message: err.message });
+    return;
+  }
+
+  app.log.error(err.message);
+});
+
 const errorHandler = (err: Error | null, event: string, origin = '') => {
   logger.fatal(err, event, { origin });
 
