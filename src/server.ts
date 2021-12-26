@@ -3,9 +3,8 @@ import app from './app';
 
 const start = async () => {
   try {
-    await app.listen(config.PORT, (err: Error | null, address: string) => {
+    app.listen(config.PORT, (err: Error | null) => {
       if (err) throw err;
-      console.log(`Server is now listening on ${address}`);
     });
   } catch (err) {
     app.log.error(err);
