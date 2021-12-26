@@ -2,11 +2,15 @@ import fastify from 'fastify';
 import fastifySwagger from 'fastify-swagger';
 import path from 'path';
 
+import pinoLogger from './common/logger';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
 
-const app = fastify({ logger: true });
+const app = fastify({
+  logger: pinoLogger,
+  disableRequestLogging: true,
+});
 
 app.register(fastifySwagger, {
   exposeRoute: true,
