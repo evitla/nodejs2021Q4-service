@@ -18,7 +18,11 @@ npm install
 ```
 
 ## Running application
-
+### using docker
+```
+docker-compose up
+```
+### using npm
 ```
 npm start
 ```
