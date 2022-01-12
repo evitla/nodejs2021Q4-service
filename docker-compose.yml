@@ -1,0 +1,33 @@
+version: '3.8'
+volumes:
+  logs:
+  db:
+services:
+  backend:
+    build: .
+    restart: always
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/app/
+      - logs:/app/logs
+    depends_on:
+      - db
+    networks:
+      - nodejs-service
+
+  db:
+    build: ./database
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db:/var/lib/postgresql
+    networks:
+      - nodejs-service
+
+networks:
+  nodejs-service:
+    driver: bridge
